@@ -20,13 +20,11 @@ class MergeSort {
     val loopIndex: AtomicInteger = AtomicInteger()
 
     fun sort(inputArray: Array<Int>): Array<Int> {
-        val sortedArray = sortHelper(inputArray, 0, inputArray.size - 1)
-
-
-        return sortedArray
+        return sortHelper(inputArray, 0, inputArray.size - 1)
     }
 
     private fun sortHelper(inputArray: Array<Int>, start: Int, end: Int): Array<Int> {
+
 
         // checking leaf
         if (start == end) return inputArray
@@ -52,35 +50,19 @@ class MergeSort {
         var auxArray = emptyArray<Int>()//Array(end - start + 1) { 0 }
 
         while (left <= mid && right <= end) {
-            loopIndex.incrementAndGet()
-            if (inputArray[left] <= inputArray[right]) {
-                auxArray += inputArray[left]
-                left++
+            auxArray += if (inputArray[left] <= inputArray[right]) {
+                inputArray[left++]
             } else {
-                auxArray += inputArray[right]
-                right++
+                inputArray[right++]
             }
         }
 
-        // Gather remaining elements either in left or right half of the array
-        // first checking for left half
-        while (left <= mid) {
-            loopIndex.incrementAndGet()
-            auxArray += inputArray[left]
-            left++
-        }
-        // then checking for right half
-        while (right <= end) {
-            loopIndex.incrementAndGet()
-            auxArray += inputArray[right]
-            right++
-        }
+        while (left <= mid) auxArray += inputArray[left++]
+
+        while (right <= end) auxArray += inputArray[right++]
 
         // till now all the elements are sorted in auxiliary array. Need to copy it original array.
-        auxArray.forEachIndexed { index, i ->
-            loopIndex.incrementAndGet()
-            inputArray[start + index] = i
-        }
+        auxArray.forEachIndexed { index, i -> inputArray[start + index] = i }
 
         return inputArray
 

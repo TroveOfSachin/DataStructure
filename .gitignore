@@ -47,6 +47,6 @@ bin/
 .gradle
 build
 
-src/generatedData/Arrays.txt
+../../Arrays.txt
 
 
