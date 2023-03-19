@@ -42,10 +42,16 @@ class MergeSort {
         // now we have sorted arrays of both the half's
         // Merging the two sorted array from the start index of both half arrays.
 
+        merge(inputArray, start, end, mid)
+
+        return inputArray
+
+    }
+
+    private fun merge(inputArray: Array<Int>, start: Int, end: Int, mid:Int){
 
         var left = start // starting index of left half array
         var right = mid + 1 // starting index of right half array
-
         // need to merge into auxiliary or temporary array as we cannot easily swap two numbers in two array.
         var auxArray = emptyArray<Int>()//Array(end - start + 1) { 0 }
 
@@ -63,9 +69,6 @@ class MergeSort {
 
         // till now all the elements are sorted in auxiliary array. Need to copy it original array.
         auxArray.forEachIndexed { index, i -> inputArray[start + index] = i }
-
-        return inputArray
-
     }
 
 

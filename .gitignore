@@ -47,6 +47,6 @@ bin/
 .gradle
 build
 
-../../Arrays.txt
+../../../Arrays.txt
 
 
