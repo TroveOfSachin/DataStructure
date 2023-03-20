@@ -14,6 +14,14 @@ import java.util.AbstractCollection
 
  */
 fun <T> Array<T>.swap(elementIndex: Int, targetIndex: Int) {
+    if (elementIndex == targetIndex) return
+    val temp = this[elementIndex]
+    this[elementIndex] = this[targetIndex]
+    this[targetIndex] = temp
+}
+
+fun <T> ArrayList<T>.swap(elementIndex: Int, targetIndex: Int) {
+    if (elementIndex == targetIndex) return
     val temp = this[elementIndex]
     this[elementIndex] = this[targetIndex]
     this[targetIndex] = temp
