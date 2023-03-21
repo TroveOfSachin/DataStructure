@@ -1,21 +1,21 @@
 package sorting
 
+import print
 import swap
 import java.util.concurrent.atomic.AtomicInteger
 
 fun main() {
     val quickSort = QuickSort()
 //    val inputArray = arrayOf(4, 2, 8, 7, 1, 3, 5, 6)
-//    val inputArray = RandomArrayGenerator.getArray(20)
+    val inputArray = RandomArrayGenerator.getArray(20)
 
-    val listOfFour = (1..10000000).map { 4 }
-    val inputArray = listOfFour.toTypedArray()
+//    val listOfFour = (1..10).map { 4 }
+//    val inputArray = listOfFour.toTypedArray()
 
-    println("UnSorted Array")
-//    println(inputArray.contentToString())
-    println("Sorted Array")
+    inputArray.print("UnSorted Array")
     quickSort.sort(inputArray)
-//    println(inputArray.contentToString())
+    inputArray.print("Sorted Array")
+
     println("Loop Counter : ${quickSort.loopIndex.get()}")
 }
 
