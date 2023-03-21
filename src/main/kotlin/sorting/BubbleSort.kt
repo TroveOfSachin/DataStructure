@@ -10,12 +10,12 @@ fun main() {
     val bubbleSort = BubbleSort()
     val inputArray = RandomArrayGenerator.getArray(10)
 
+    // inputArray.sort() // uncomment this line if wanted to check with best case
     inputArray.print("UnSorted Array")
     bubbleSort.sort(inputArray)
     inputArray.print("Sorted Array")
 
     print("${"*".repeat(50)}\n")
-    println("Hello World")
     print("Loop Count : ${bubbleSort.loopIndex.get()} \n")
 
 
