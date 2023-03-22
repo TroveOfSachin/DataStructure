@@ -33,17 +33,17 @@ import kotlin.collections.ArrayList
  */
 
 fun main() {
-    val input = arrayListOf(-100, 0, 1, 100, 200, 399)
-    val outputLargest = KthElementSearch().findLargest(input, 4)
+    val input = arrayListOf(5, 1, 10, 3, 2)
+//    val outputLargest = KthElementSearch().findLargest(input, 4)
 
-
+    val outputLargest = KthElementSearch().findSmallest(input, 4)
     println("Kth i.e 4 largest element =  ${input[outputLargest]}")
 }
 
 class KthElementSearch {
 
     fun findLargest(input: ArrayList<Int>, k: Int): Int {
-        return sortLargest(input, 0, input.size - 1, input.size -k)
+        return sortLargest(input, 0, input.size - 1, input.size - k)
     }
 
 
@@ -53,11 +53,30 @@ class KthElementSearch {
 
         var m = lumotoSort(input, start, end)
 
-        return if (m ==  k) return k
+        return if (m == k) return k
         else if (k < m)
-            sortLargest(input, start, m-1, k)
+            sortLargest(input, start, m - 1, k)
         else
             sortLargest(input, m + 1, end, k)
+
+    }
+
+
+    fun findSmallest(input: ArrayList<Int>, k: Int): Int {
+        return sortLargest(input, 0, input.size - 1, k-1)
+    }
+
+    private fun sortSmallest(input: ArrayList<Int>, start: Int, end: Int, k: Int): Int {
+
+        if (start == end) return start
+
+        var m = lumotoSort(input, start, end)
+
+        return if (m == k) return k
+        else if (k < m)
+            sortLargest(input, m + 1, end, k)
+        else
+            sortLargest(input, start, m - 1, k)
 
     }
 
