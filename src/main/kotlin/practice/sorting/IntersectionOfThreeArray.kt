@@ -56,17 +56,15 @@ import print
 
 
 fun main() {
-    var arr1 = arrayListOf(1, 2, 3)
-    var arr2 = arrayListOf<Int>()
+    var arr1 = arrayListOf(1, 2, 2, 2, 9)
+    var arr2 = arrayListOf(1, 1, 2, 2)
     var arr3 = arrayListOf(1, 1, 1, 2, 2, 2)
 
-//    var result = IntersectionOfThreeArray().findIntersectionWay1(arr1, arr2, arr3)
-//
-//    result.print("Output")
-
-    var result = IntersectionOfThreeArray().findIntersectionWay2(arr1, arr2, arr3)
+    var result = IntersectionOfThreeArray().findIntersectionWay1(arr1, arr2, arr3)
 
     result.print("Output")
+
+
 
 }
 
@@ -77,11 +75,11 @@ class IntersectionOfThreeArray {
         var result = find(arr1, arr2)
         if (result.isEmpty()) return arrayListOf(-1)
         result = find(result, arr3)
-        if (result.isEmpty())  result = arrayListOf(-1)
+        if (result.isEmpty()) result = arrayListOf(-1)
         return result
     }
 
-    fun find(arr1: ArrayList<Int>, arr2: ArrayList<Int>): ArrayList<Int> {
+    private fun find(arr1: ArrayList<Int>, arr2: ArrayList<Int>): ArrayList<Int> {
 
         val output = arrayListOf<Int>()
 
@@ -123,6 +121,5 @@ class IntersectionOfThreeArray {
         if (output.isEmpty()) output.add(-1)
         return output
     }
-
 
 }
