@@ -3,6 +3,7 @@ package practice.sorting
 import java.util.*
 
 import kotlin.collections.ArrayList
+import kotlin.math.min
 
 /**
  * ### Kth Largest In An Array
@@ -34,10 +35,16 @@ import kotlin.collections.ArrayList
 
 fun main() {
     val input = arrayListOf(5, 1, 10, 3, 2)
-//    val outputLargest = KthElementSearch().findLargest(input, 4)
 
-    val outputLargest = KthElementSearch().findSmallest(input, 4)
-    println("Kth i.e 4 largest element =  ${input[outputLargest]}")
+    val k = 3
+
+
+    val output = KthElementSearch().findSmallestKWithHeap(input, k)
+
+
+    println("Kth Smallest Element is $output")
+
+
 }
 
 class KthElementSearch {
@@ -63,7 +70,7 @@ class KthElementSearch {
 
 
     fun findSmallest(input: ArrayList<Int>, k: Int): Int {
-        return sortLargest(input, 0, input.size - 1, k-1)
+        return sortLargest(input, 0, input.size - 1, k - 1)
     }
 
     private fun sortSmallest(input: ArrayList<Int>, start: Int, end: Int, k: Int): Int {
@@ -94,6 +101,37 @@ class KthElementSearch {
 
         return orange
 
+    }
+
+
+    fun findLargestKWithHeap(input: ArrayList<Int>, k: Int): Int {
+
+        val minHeap = PriorityQueue<Int>()
+        minHeap.add(Int.MIN_VALUE)
+        input.forEach { inputNumber ->
+            if (minHeap.size <= k || minHeap.peek() < inputNumber) {
+                minHeap.add(inputNumber)
+            }
+            if (minHeap.size > k) {
+                minHeap.poll()
+            }
+        }
+        return minHeap.peek()
+    }
+
+    fun findSmallestKWithHeap(input: ArrayList<Int>, k: Int): Int {
+
+        val minHeap = PriorityQueue<Int>(compareByDescending { it })
+        minHeap.add(Int.MAX_VALUE)
+        input.forEach { inputNumber ->
+            if (minHeap.size <= k || minHeap.peek() > inputNumber) {
+                minHeap.add(inputNumber)
+            }
+            if (minHeap.size > k) {
+                minHeap.poll()
+            }
+        }
+        return minHeap.peek()
     }
 
 

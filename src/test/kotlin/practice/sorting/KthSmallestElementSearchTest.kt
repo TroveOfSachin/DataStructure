@@ -109,6 +109,11 @@ class KthSmallestElementSearchTest {
     }
     
     private fun findSmallestTest(input:ArrayList<Int>, kth:Int, expected:Int){
+        val output = kthElementSearch.findSmallestKWithHeap(input, kth)
+        assertEquals(expected, output)
+    }
+
+    private fun findSmallestWithQuickSelectionTest(input:ArrayList<Int>, kth:Int, expected:Int){
         val output = kthElementSearch.findSmallest(input, kth)
         assertEquals(expected, input[output])
     }

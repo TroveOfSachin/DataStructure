@@ -109,6 +109,11 @@ class KthLargestElementSearchTest {
     }
     
     private fun findLargestTest(input:ArrayList<Int>, kth:Int, expected:Int){
+        val output = kthElementSearch.findLargestKWithHeap(input, kth)
+        assertEquals(expected, output)
+    }
+
+    private fun findLargestTestWithQuickSelection(input:ArrayList<Int>, kth:Int, expected:Int){
         val output = kthElementSearch.findLargest(input, kth)
         assertEquals(expected, input[output])
     }
