@@ -28,56 +28,43 @@ import java.util.*
 fun main() {
     val solution = MergeKSortedLinkedList()
 
-    val lists: ArrayList<LinkedListNode?> = ArrayList()
-    var head: LinkedListNode? = null
-    var node: LinkedListNode? = null
-    (1..5 step 2).forEach { counter ->
-        node?.let {
-            it.next = LinkedListNode(counter, null)
-            node = it.next
-        } ?: run {
-            node = LinkedListNode(counter, null)
-            head = node
 
+    val e1 = LinkedList((1..5 step 2).toList())
+    val e2 = LinkedList((3..4).toList())
+    val e3 = LinkedList((7..7).toList())
+    val e4 = LinkedList((3..15 step 3).toList())
+    val lists = arrayListOf(e1, e2, e3, e4)
+    val input = arrayListOf<LinkedListNode?>()
+
+    lists.forEach {
+
+        var head: LinkedListNode? = null
+        var tail: LinkedListNode? = null
+        var node = it
+
+        it.forEach { node ->
+
+            node?.let {
+                tail?.let { cc ->
+                    cc.next = LinkedListNode(node, null)
+                    tail = cc.next
+                } ?: run {
+                    tail = LinkedListNode(node, null)
+                    head = tail
+                }
+            }
         }
+
+
+        input.add(head)
     }
 
-    lists.add(head)
-    head = null
-    node = null
-    (3..4).forEach { counter ->
-        node?.let {
-            it.next = LinkedListNode(counter, null)
-            node = it.next
-        } ?: run {
-            node = LinkedListNode(counter, null)
-            head = node
-
-        }
-    }
-    lists.add(head)
-    head = null
-    node = null
-    (7..7).forEach { counter ->
-        node?.let {
-            it.next = LinkedListNode(counter, null)
-            node = it.next
-        } ?: run {
-            node = LinkedListNode(counter, null)
-            head = node
-
-        }
-    }
-    lists.add(head)
-
-
-    val result = solution.sort(lists)
+    var result = solution.sortWithoutAuxiliarySpace(input)
     val output = mutableListOf<Int>()
-    var current = result
 
-    while (current != null) {
-        output.add(current.value)
-        current = current.next
+    while (result != null) {
+        output.add(result.value)
+        result = result.next
     }
 
     output.toTypedArray().print("Sorted Element")
@@ -139,6 +126,72 @@ class MergeKSortedLinkedList {
         return head?.next
     }
 
+    fun sortA(lists: ArrayList<LinkedListNode?>): LinkedListNode? {
+
+
+        if (lists.isEmpty()) return null
+
+        val minHeap = PriorityQueue<LinkedListNode> { a, b -> b.value.compareTo(a.value) }
+        var result: LinkedListNode? = null
+        lists.forEach {
+            var temp = it
+            while (temp != null) {
+                var next = temp.next
+                temp.next = null
+                minHeap.add(temp)
+                temp = next
+            }
+        }
+
+        for (i in 0 until minHeap.size) {
+            result?.let {
+                val newNode = minHeap.poll()
+                newNode.next = result
+                result = newNode
+
+            } ?: run {
+                result = minHeap.poll()
+            }
+        }
+        return result
+    }
+
+
+    fun sortWithoutAuxiliarySpace(lists: ArrayList<LinkedListNode?>): LinkedListNode? {
+        if (lists.isEmpty()) return null
+        return MergeKSortedLinkedListInPlace().sort(lists, 0, lists.lastIndex)
+    }
+
+    private class MergeKSortedLinkedListInPlace {
+
+        fun sort(lists: ArrayList<LinkedListNode?>, start: Int, end: Int): LinkedListNode? {
+
+            if (start == end) return lists[start]
+
+            // calculate mid
+            val mid = (end + start) / 2
+            val left = sort(lists, start, mid)
+            val right = sort(lists, mid + 1, end)
+
+            return mergeLeftRight(left, right)
+        }
+
+        private fun mergeLeftRight(left: LinkedListNode?, right: LinkedListNode?): LinkedListNode? {
+
+            if (left == null)
+                return right
+            if (right == null)
+                return left
+
+            return if (left.value < right.value) {
+                left.next = mergeLeftRight(left.next, right)
+                left
+            } else {
+                right.next = mergeLeftRight(left, right.next)
+                right
+            }
+        }
+    }
 
 }
 
