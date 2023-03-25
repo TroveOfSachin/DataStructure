@@ -40,7 +40,6 @@ fun main() {
 
         var head: LinkedListNode? = null
         var tail: LinkedListNode? = null
-        var node = it
 
         it.forEach { node ->
 
