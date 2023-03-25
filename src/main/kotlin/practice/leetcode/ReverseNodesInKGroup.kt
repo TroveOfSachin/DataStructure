@@ -1,5 +1,7 @@
 package practice.leetcode
 
+import linkedlist.ListNode
+
 
 /**
  * ## Reverse Nodes in k-Group
@@ -69,10 +71,6 @@ private fun printList(head: ListNode?) {
     }
 }
 
-
-class ListNode(var value: Int) {
-    var next: ListNode? = null
-}
 
 
 class ReverseNodesInKGroup {
