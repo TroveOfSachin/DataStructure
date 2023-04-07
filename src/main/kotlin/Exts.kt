@@ -1,5 +1,3 @@
-import java.util.AbstractCollection
-
 /**
  * Is an extension function for swapping elements into an array
  *
@@ -28,14 +26,17 @@ fun <T> ArrayList<T>.swap(elementIndex: Int, targetIndex: Int) {
 }
 
 
-fun <T> Array<T>.print(message: String) {
-    println(message)
+fun <T> Array<T>.print(message: String, isSameLine: Boolean = false) {
+    if (isSameLine)
+        System.out.print("$message : ")
+    else println(message)
+
     println(this.contentToString())
 }
 
 fun IntArray.print(message: String) {
-//    println(message)
-    print(this.contentToString())
+    println(message)
+    println(this.contentToString())
 }
 
 fun <T> List<T>.print(message: String) {
