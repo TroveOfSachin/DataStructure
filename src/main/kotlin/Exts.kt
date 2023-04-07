@@ -33,6 +33,11 @@ fun <T> Array<T>.print(message: String) {
     println(this.contentToString())
 }
 
+fun IntArray.print(message: String) {
+//    println(message)
+    print(this.contentToString())
+}
+
 fun <T> List<T>.print(message: String) {
     println(message)
     println(this.joinToString())
