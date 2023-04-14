@@ -22,6 +22,8 @@ class ContainerWithMostWater {
 
         var maxArea = 0
 
+        "".toInt()
+
         while (start < last) {
 
             maxArea = max(maxArea, min(h[start], h[last]) * (last - start))

@@ -23,9 +23,7 @@ class ThreeSum {
     fun twoSum(nums: IntArray, start: Int, target: Int, supplement:Int): IntArray {
         // Write your code here.
 
-
         val complementMap = mutableMapOf<Int, Int>()
-
 
         for (index in start..nums.lastIndex) {
 

@@ -6,8 +6,8 @@ import java.util.PriorityQueue
 
 fun main() {
 
-    val input = arrayListOf('a', 's', 'd', 'f', 'g', '*', '&', '!', 'z', 'y', '*')
-    val output = SortAllCharacters().sortUsingAsciiLength(input)
+    val input = arrayListOf('b', 'a', '*')
+    val output = SortAllCharacters().sortUsingAsciiLengthApproach2(input)
 
 
     println(output)
@@ -51,7 +51,7 @@ class SortAllCharacters {
         val asciiCounter = IntArray(128)
 
         input.forEach {
-            asciiCounter[it.code] = asciiCounter[it.code]+1
+            asciiCounter[it.code] = asciiCounter[it.code] + 1
         }
         input.clear()
         asciiCounter.forEachIndexed { index, _ ->
@@ -60,6 +60,33 @@ class SortAllCharacters {
         return input
 
 
+    }
+
+
+    fun sortUsingAsciiLengthApproach2(input: ArrayList<Char>): ArrayList<Char> {
+
+        val asciiCounter = IntArray(128)
+        sortChars(input, 0, input.size - 1, asciiCounter)
+        input.clear()
+        asciiCounter.forEachIndexed { index, _ ->
+            repeat(asciiCounter[index]) { input += index.toChar() }
+        }
+        return input
+    }
+
+
+    private fun sortChars(input: ArrayList<Char>, start: Int, end: Int, slate: IntArray) {
+        if (start > end) {
+            return
+        }
+
+        if (start == end) {
+            slate[input[start].code] = slate[input[start].code] + 1
+        } else {
+            slate[input[start].code] = slate[input[start].code] + 1
+            slate[input[end].code] = slate[input[end].code] + 1
+        }
+        sortChars(input, start + 1, end - 1, slate)
     }
 
 

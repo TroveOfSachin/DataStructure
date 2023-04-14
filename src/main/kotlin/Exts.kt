@@ -43,3 +43,24 @@ fun <T> List<T>.print(message: String) {
     println(message)
     println(this.joinToString())
 }
+
+fun <T> List<T>.permuteWithoutRepetition(): List<List<T>> =
+    when {
+        isEmpty() -> listOf(emptyList())
+        size == 1 -> listOf(this)
+        else -> flatMap { element ->
+            val remainingElements = this - element
+            remainingElements.permuteWithoutRepetition().map { permutation -> listOf(element) + permutation }
+        }
+    }
+
+
+fun <T> List<T>.permuteWithRepetition(length: Int): List<List<T>> {
+    if (length == 0) {
+        return listOf(emptyList())
+    }
+    return flatMap { element ->
+        val permutations = permuteWithRepetition(length - 1)
+        permutations.map { it + element }
+    }
+}
