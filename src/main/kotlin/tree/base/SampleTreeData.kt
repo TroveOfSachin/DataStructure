@@ -1,4 +1,4 @@
-package tree
+package tree.base
 
 object SampleTreeData {
 

@@ -1,4 +1,4 @@
-package tree
+package tree.base
 
 data class BinaryTreeNode(
     var key: Int, var value: Any? = null, var left: BinaryTreeNode? = null, var right: BinaryTreeNode? = null

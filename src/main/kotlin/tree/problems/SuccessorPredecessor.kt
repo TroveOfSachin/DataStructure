@@ -1,7 +1,8 @@
-package tree
+package tree.problems
 
-import java.util.*
-import kotlin.collections.ArrayList
+import tree.base.BTreePrinter
+import tree.base.BinaryTreeNode
+import tree.base.SampleTreeData
 
 
 fun main() {

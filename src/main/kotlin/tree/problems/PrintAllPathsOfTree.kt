@@ -1,6 +1,8 @@
-package tree
+package tree.problems
 
 import print
+import tree.base.BinaryTreeNode
+import tree.base.SampleTreeData
 import java.util.*
 
 
