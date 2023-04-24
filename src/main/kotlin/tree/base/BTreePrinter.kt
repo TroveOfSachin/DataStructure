@@ -23,7 +23,7 @@ object BTreePrinter {
         val newNodes: MutableList<BinaryTreeNode?> = ArrayList()
         for (node in nodes) {
             if (node != null) {
-                sb.append(node.key)
+                sb.append(node.value)
                 newNodes.add(node.left)
                 newNodes.add(node.right)
             } else {

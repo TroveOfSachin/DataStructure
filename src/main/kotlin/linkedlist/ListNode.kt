@@ -12,4 +12,20 @@ data class ListNode(var value: Int, var next: ListNode? = null) {
         }
     }
 
+    companion object {
+
+
+        fun create(arr: List<Int>): ListNode? {
+
+            var head: ListNode? = null
+
+            for (i in arr.indices.reversed()) {
+                val newNode = ListNode(arr[i])
+                newNode.next = head
+                head = newNode
+            }
+            return head
+        }
+    }
+
 }

@@ -15,7 +15,7 @@ fun main() {
 //    var output = SuccessorPredecessor().findSuccessor(root, k!!)
 //    println("Successor of ${k.key} = ${output?.key}")
     var output = SuccessorPredecessor().findPredecessor(root, k!!)
-    println("Predecessor of ${k.key} = ${output?.key}")
+    println("Predecessor of ${k.value} = ${output?.value}")
 
 }
 
@@ -42,8 +42,8 @@ class SuccessorPredecessor {
 
         var ancestor: BinaryTreeNode? = null
         var current = root
-        while (current?.key != k.key) {
-            if (k.key < current?.key!!) {
+        while (current?.value != k.value) {
+            if (k.value < current?.value!!) {
                 ancestor = current
                 current = current.left
 
@@ -77,8 +77,8 @@ class SuccessorPredecessor {
 
         var ancestor: BinaryTreeNode? = null
         var current = root
-        while (current!=null && current.key != k.key) {
-            if (k.key > current?.key!!) {
+        while (current!=null && current.value != k.value) {
+            if (k.value > current?.value!!) {
                 ancestor = current
                 current = current.right
 

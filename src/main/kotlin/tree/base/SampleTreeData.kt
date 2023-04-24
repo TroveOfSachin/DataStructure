@@ -1,5 +1,7 @@
 package tree.base
 
+import linkedlist.ListNode
+
 object SampleTreeData {
 
     // @formatter:off
@@ -31,14 +33,39 @@ object SampleTreeData {
         0, 1, 3, 6
     )
 
+    private val arr5 = arrayListOf(
+        10,
+        25, 30,
+        45, null, 40, 50
+    )
+
+    private val arr6 = arrayListOf(
+        100,
+        200, 300,
+
+        )
+
 
     private val arr1 = (0..4).toList()
 
+    private val arr7 = arrayListOf(
+        1,
+        2, 3,
+        4, 5, 6
+    )
 
-    private val root: BinaryTreeNode? = createTreeFromArray(arr1)
+    private val arr8 = arrayListOf(
+        0, 1
+    )
+
+    private val arr9 = arrayListOf<Int>()
 
 
-     fun createTreeFromArray(arr: List<Int?>?): BinaryTreeNode? {
+    private val root: BinaryTreeNode? = createTreeFromArray(arr8)
+    fun getTreeAsNode() = root
+
+
+    fun createTreeFromArray(arr: List<Int?>?): BinaryTreeNode? {
         if (arr.isNullOrEmpty() || arr[0] == null) {
             return null
         }
@@ -70,8 +97,6 @@ object SampleTreeData {
         createTreeFromArrayHelper(arr, node.right, rightIndex)
     }
 
-
-    fun getTreeAsNode() = root
 
     fun getTreeAsList() = arr
 

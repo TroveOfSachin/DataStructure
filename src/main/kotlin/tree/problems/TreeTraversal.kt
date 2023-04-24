@@ -22,7 +22,7 @@ class TreeTraversal {
 
         fun traverse(root: BinaryTreeNode?, output: ArrayList<Int>): ArrayList<Int> {
             if (root == null) return output
-            output.add(root.key)
+            output.add(root.value)
             traverse(root.left, output)
             traverse(root.right, output)
             return output
@@ -36,7 +36,7 @@ class TreeTraversal {
             if (root == null) return output
 
             traverse(root.left, output)
-            output.add(root.key)
+            output.add(root.value)
             traverse(root.right, output)
             return output
         }
@@ -50,7 +50,7 @@ class TreeTraversal {
 
             traverse(root.left, output)
             traverse(root.right, output)
-            output.add(root.key)
+            output.add(root.value)
             return output
         }
         return traverse(root, arrayListOf())

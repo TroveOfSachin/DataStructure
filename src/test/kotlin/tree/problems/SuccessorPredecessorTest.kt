@@ -1,10 +1,9 @@
-package tree
+package tree.problems
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import tree.base.BinaryTreeNode
 import tree.base.SampleTreeData
-import tree.problems.SuccessorPredecessor
 
 class SuccessorPredecessorTest {
 
