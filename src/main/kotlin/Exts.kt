@@ -31,10 +31,19 @@ fun <T> Array<T>.print(message: String, isSameLine: Boolean = false) {
         System.out.print("$message : ")
     else println(message)
 
-    println(this.contentToString())
+    println(this.contentDeepToString())
 }
 
 fun IntArray.print(message: String) {
+    println(message)
+    println(this.contentToString())
+}
+
+fun IntArray.toString(): String {
+    return this.contentToString()
+}
+
+fun LongArray.print(message: String) {
     println(message)
     println(this.contentToString())
 }
