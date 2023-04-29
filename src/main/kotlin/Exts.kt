@@ -1,5 +1,3 @@
-import java.util.AbstractCollection
-
 /**
  * Is an extension function for swapping elements into an array
  *
@@ -28,7 +26,24 @@ fun <T> ArrayList<T>.swap(elementIndex: Int, targetIndex: Int) {
 }
 
 
-fun <T> Array<T>.print(message: String) {
+fun <T> Array<T>.print(message: String, isSameLine: Boolean = false) {
+    if (isSameLine)
+        System.out.print("$message : ")
+    else println(message)
+
+    println(this.contentDeepToString())
+}
+
+fun IntArray.print(message: String) {
+    println(message)
+    println(this.contentToString())
+}
+
+fun IntArray.toString(): String {
+    return this.contentToString()
+}
+
+fun LongArray.print(message: String) {
     println(message)
     println(this.contentToString())
 }
@@ -36,4 +51,25 @@ fun <T> Array<T>.print(message: String) {
 fun <T> List<T>.print(message: String) {
     println(message)
     println(this.joinToString())
+}
+
+fun <T> List<T>.permuteWithoutRepetition(): List<List<T>> =
+    when {
+        isEmpty() -> listOf(emptyList())
+        size == 1 -> listOf(this)
+        else -> flatMap { element ->
+            val remainingElements = this - element
+            remainingElements.permuteWithoutRepetition().map { permutation -> listOf(element) + permutation }
+        }
+    }
+
+
+fun <T> List<T>.permuteWithRepetition(length: Int): List<List<T>> {
+    if (length == 0) {
+        return listOf(emptyList())
+    }
+    return flatMap { element ->
+        val permutations = permuteWithRepetition(length - 1)
+        permutations.map { it + element }
+    }
 }

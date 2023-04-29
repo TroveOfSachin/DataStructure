@@ -1,5 +1,6 @@
 package sorting
 
+import RandomArrayGenerator
 import print
 import swap
 import java.util.concurrent.atomic.AtomicInteger
@@ -7,13 +8,14 @@ import java.util.concurrent.atomic.AtomicInteger
 fun main() {
     val quickSort = QuickSort()
 //    val inputArray = arrayOf(4, 2, 8, 7, 1, 3, 5, 6)
-    val inputArray = RandomArrayGenerator.getArray(20)
+    var inputArray = RandomArrayGenerator.getArray(10)
 
 //    val listOfFour = (1..10).map { 4 }
 //    val inputArray = listOfFour.toTypedArray()
 
     inputArray.print("UnSorted Array")
     quickSort.sort(inputArray)
+
     inputArray.print("Sorted Array")
 
     println("Loop Counter : ${quickSort.loopIndex.get()}")
@@ -53,7 +55,7 @@ class QuickSort {
      * @return pivot element index after rearrangement from start to its mid-position in the partition
      *
      */
-    private fun lomotoPartition(inputArray: Array<Int>, start: Int, end: Int): Int {
+    fun lomutoPartition(inputArray: Array<Int>, start: Int, end: Int): Int {
         // divide & conquer
         // doing a partition of the given array by considering our first array element as a pivot called it as "start"
         // arranging remaining elements for smaller and bigger partition around pivot by using linear iteration
@@ -81,7 +83,7 @@ class QuickSort {
      * @return pivot element index after rearrangement from start to its mid-position in the partition
      *
      */
-    private fun hoareInPlacePartition(inputArray: Array<Int>, start: Int, end: Int): Int {
+    fun hoareInPlacePartition(inputArray: Array<Int>, start: Int, end: Int): Int {
         // rather getting first element as a pivot element we will choose a random index as a pivot element
         // it will help us to avoid worst case time complexity
 

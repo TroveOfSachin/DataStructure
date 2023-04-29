@@ -1,6 +1,7 @@
 package practice.sorting
 
 import print
+import java.util.PriorityQueue
 
 /**
  * ### Online Median
@@ -43,8 +44,56 @@ class OnlineMedian {
 
     fun findMedian(stream: ArrayList<Int>): ArrayList<Int> {
 
-        val sortedStream = arrayListOf<Int>()
+        val leftHeap = PriorityQueue<Int>(compareByDescending { it }) // largest element at root
+        val rightHeap = PriorityQueue<Int>() // smallest element at root
+
         val output = arrayListOf<Int>()
+
+        stream.forEach {
+
+            if (leftHeap.size == 0 && rightHeap.size == 0) {
+                leftHeap.add(it)
+                output.add(leftHeap.peek())
+            } else {
+
+                if (leftHeap.size == rightHeap.size) {
+                    if (it <= leftHeap.peek()) {
+                        leftHeap.add(it)
+                        output.add(leftHeap.peek())
+
+                    } else {
+                        rightHeap.add(it)
+                        output.add(rightHeap.peek())
+
+                    }
+
+
+                } else if (leftHeap.size > rightHeap.size) {
+
+                    val leftMax = leftHeap.poll()
+
+                    if (it <= leftMax) {
+                        leftHeap.add(it)
+                        rightHeap.add(leftMax)
+                    } else {
+                        leftHeap.add(leftMax)
+                        rightHeap.add(it)
+                    }
+                    output.add((leftHeap.peek() + rightHeap.peek()) / 2)
+
+                } else { // right heap size is larger
+                    val rightSmall = rightHeap.poll()
+                    if (it >= rightSmall) {
+                        rightHeap.add(it)
+                        leftHeap.add(rightSmall)
+                    } else {
+                        rightHeap.add(rightSmall)
+                        leftHeap.add(it)
+                    }
+                    output.add((leftHeap.peek() + rightHeap.peek()) / 2)
+                }
+            }
+        }
 
         return output
     }
