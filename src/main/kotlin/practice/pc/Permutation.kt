@@ -1,4 +1,4 @@
-package practice.sorting
+package practice.pc
 
 import permuteWithRepetition
 import permuteWithoutRepetition
@@ -6,10 +6,10 @@ import print
 
 
 fun main() {
-//    val x = arrayListOf(1, 2, 3)
+    val x = arrayListOf(1, 2, 2)
 //    x.permuteWithRepetition(3).print("Output with Repetition")
 //
-//    x.permuteWithoutRepetition().print("Output without Repetition")
+    x.permuteWithoutRepetition().print("Output without Repetition")
 //
 //
     val output =  Permutation().createPermutationWithSelf(arrayListOf(1,2,2), 3)

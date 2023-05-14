@@ -1,11 +1,10 @@
 package tree.base
 
 data class MultiTreeNode(
-    var key: Int,
-    var value: Int? = null,
-    var childrens: List<MultiTreeNode?>? = null,
+    var value: Int ,
+    var childrens: MutableList<MultiTreeNode>? = null,
 ) {
     override fun toString(): String {
-        return "[$key, $value, ${childrens?.joinToString()}]"
+        return "[$value, ${childrens?.joinToString()}]"
     }
 }

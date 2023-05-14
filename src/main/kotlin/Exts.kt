@@ -64,6 +64,17 @@ fun <T> List<T>.permuteWithoutRepetition(): List<List<T>> =
     }
 
 
+fun <T> ArrayList<T>.permute(): List<List<T>> =
+    when {
+        isEmpty() -> arrayListOf(emptyList())
+        size == 1 -> arrayListOf(this)
+        else -> flatMap { element ->
+            val remainingElements = this - element
+            remainingElements.permuteWithoutRepetition().map { permutation -> arrayListOf(element) + permutation }
+        }
+    }
+
+
 fun <T> List<T>.permuteWithRepetition(length: Int): List<List<T>> {
     if (length == 0) {
         return listOf(emptyList())

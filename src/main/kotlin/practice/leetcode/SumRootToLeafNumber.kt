@@ -2,6 +2,7 @@ package practice.leetcode
 
 
 import tree.base.BinaryTreeNode
+import tree.base.MultiTreeNode
 import tree.base.SampleTreeData
 import java.util.*
 import kotlin.collections.ArrayList
@@ -160,11 +161,11 @@ class SumRootToLeafNumber {
         var smallestString: String? = null
 
         fun findSmallest(root: BinaryTreeNode?, slate: Stack<Char>) {
-            if (root == null)  return
+            if (root == null) return
 
             slate.push(chars[root.value])
 
-            if(root.left == null && root.right == null){
+            if (root.left == null && root.right == null) {
                 val current = slate.reversed().joinToString("")
                 smallestString?.let {
                     if (it > current && slate.size > 1)
@@ -182,6 +183,31 @@ class SumRootToLeafNumber {
 
         findSmallest(root, Stack())
         return smallestString ?: ""
+    }
+
+    fun levelOrder(root: MultiTreeNode?): List<List<Int>> {
+        val res = mutableListOf<MutableList<Int>>()
+        if (root == null) return listOf()
+
+        val q = LinkedList<MultiTreeNode>()
+        q.add(root)
+        res.add(mutableListOf(root.value))
+
+        while (q.isNotEmpty()) {
+            val sub = mutableListOf<Int>()
+            val n = q.poll()
+
+            n.childrens?.let {
+                it.forEach { child ->
+                    q.add(child!!)
+                    sub.add(child.value)
+                }
+            }
+            res.add(sub)
+        }
+        return res
+
+
     }
 
 

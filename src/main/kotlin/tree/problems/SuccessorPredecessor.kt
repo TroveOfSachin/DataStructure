@@ -92,6 +92,62 @@ class SuccessorPredecessor {
     }
 
 
+
+
+    var foundA = false
+    var foundB = false
+
+    fun lca(root: BinaryTreeNode?, a: BinaryTreeNode?, b: BinaryTreeNode?): Int {
+        // Write your code here.
+        if (root == null || a == null || b == null) {
+            return 0
+        }
+
+        val pathToAorB = ArrayList<Pair<Int, Boolean>>()
+        preorder(root, a.value, b.value, pathToAorB)
+
+        var lca: Int = 0
+        var i = 0
+        while (i < pathToAorB.size && pathToAorB[i].second) {
+            lca = pathToAorB[i].first
+            i++
+        }
+
+        return lca
+    }
+
+    var lca = true
+
+    fun preorder(node: BinaryTreeNode, a: Int, b: Int, pathToAOrB: ArrayList<Pair<Int, Boolean>>) {
+
+        if (foundA && foundB) {
+            return
+        }
+
+        pathToAOrB.add(node.value to lca)
+
+
+        if (node.value == a) {
+            foundA = true
+            lca = false
+        }
+        if (node.value == b) {
+            foundB = true
+            lca = false
+        }
+
+        if (node.left != null) {
+            preorder(node.left!!, a, b, pathToAOrB)
+        }
+        if (node.right != null) {
+            preorder(node.right!!, a, b, pathToAOrB)
+        }
+        if (!foundA || !foundB) {
+            pathToAOrB.removeAt(pathToAOrB.size - 1)
+        }
+    }
+
+
 }
 
 

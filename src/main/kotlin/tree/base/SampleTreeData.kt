@@ -1,6 +1,7 @@
 package tree.base
 
 import linkedlist.ListNode
+import java.util.*
 
 object SampleTreeData {
 
@@ -55,17 +56,31 @@ object SampleTreeData {
     )
 
     private val arr8 = arrayListOf(
-        0, 1
+        4,
+        0, 3,
+        2, 5, null, null,
+        6, null, null, null, null, null, null, null,
+        1
     )
 
-    private val arr9 = arrayListOf<Int>()
+    private val arr9 = arrayListOf<Int?>(
+        1,
+        2, 3,
+        4, null, null, 5
+    )
 
 
-    private val root: BinaryTreeNode? = createTreeFromArray(arr8)
+    private val root: BinaryTreeNode? = createTreeFromArray(arr9)
     fun getTreeAsNode() = root
+
+    private val multiArr1 = arrayOf(1, null, 3, 2, 4, null, 5, 6)
+
 
 
     fun createTreeFromArray(arr: List<Int?>?): BinaryTreeNode? {
+
+
+
         if (arr.isNullOrEmpty() || arr[0] == null) {
             return null
         }
@@ -74,6 +89,7 @@ object SampleTreeData {
         createTreeFromArrayHelper(arr, root, 0)
         return root
     }
+
 
     private fun createTreeFromArrayHelper(arr: List<Int?>, node: BinaryTreeNode?, index: Int) {
         if (node == null) {
