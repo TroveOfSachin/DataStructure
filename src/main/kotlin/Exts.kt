@@ -84,3 +84,13 @@ fun <T> List<T>.permuteWithRepetition(length: Int): List<List<T>> {
         permutations.map { it + element }
     }
 }
+
+
+
+fun <T> T.ternary(trueCondition: () -> T, falseCondition: () -> T): () -> T {
+    return if (this == true) trueCondition else falseCondition
+}
+
+fun <T> T.ternary(trueValue: T, falseValue: T): T {
+    return if (this == true) trueValue else falseValue
+}

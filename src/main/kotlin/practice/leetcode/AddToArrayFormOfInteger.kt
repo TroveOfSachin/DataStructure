@@ -1,5 +1,6 @@
 package practice.leetcode
 
+import java.util.ArrayList
 import java.util.Stack
 
 
@@ -9,6 +10,37 @@ import java.util.Stack
  *
  */
 fun main() {
+
+    fun groupAnagrams(strsIn: Array<String>): List<List<String>> {
+
+        val map = mutableMapOf<String, ArrayList<String>>()
+
+        for(str in strsIn){
+
+            val word = str.toCharArray().sorted().joinToString()
+
+//            map.getOrDefault()
+            if(!map.containsKey(word))
+                map[word] = arrayListOf(str)
+            else{
+                map[word]?.add(str)
+            }
+        }
+
+        val output = mutableListOf<List<String>>()
+
+
+
+
+
+        return map.values.toList()
+
+
+
+
+
+    }
+
 }
 
 

@@ -86,11 +86,3 @@ class Dota2Senate {
     }
 }
 
-
-fun <T> T.ternary(trueCondition: () -> T, falseCondition: () -> T): () -> T {
-    return if (this == true) trueCondition else falseCondition
-}
-
-fun <T> T.ternary(trueValue: T, falseValue: T): T {
-    return if (this == true) trueValue else falseValue
-}

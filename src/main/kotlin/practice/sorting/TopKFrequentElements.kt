@@ -1,6 +1,6 @@
 package practice.sorting
 
-import java.util.Comparator
+import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -41,7 +41,50 @@ import kotlin.collections.ArrayList
 fun main() {
 
     val topKFrequentElements = TopKFrequentElements()
-    val output = topKFrequentElements.findKFrequentElements(arrayListOf(1, 2, 3, 2, 4, 3, 1), 2)
+    val output = topKFrequentElements.findKFrequentElements_Approach_2(
+        arrayListOf(
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+        ), 3
+    )
     println(output)
 }
 
@@ -63,10 +106,64 @@ class TopKFrequentElements {
         val itr = sorted.iterator()
         val output = arrayListOf<Int>()
 
-        while ( kCounter-- > 0) {
+        while (kCounter-- > 0) {
             output.add(itr.next().key)
         }
 
         return output
+    }
+
+
+    fun findKFrequentElements_Approach_2(nums: ArrayList<Int>, k: Int): IntArray {
+
+
+        val freqMap = HashMap<Int, Int>()
+        for (num in nums) {
+            freqMap[num] = freqMap.getOrDefault(num, 0) + 1
+        }
+
+        val queue = PriorityQueue<Int> { n1, n2 -> freqMap.getOrDefault(n2, 0) - freqMap.getOrDefault(n1, 0) }
+
+        for (num in freqMap.keys) queue.add(num)
+
+        val result = IntArray(k)
+        for (i in 0 until k) {
+            result[i] = queue.remove()
+        }
+
+        return result
+
+    }
+
+    fun topKFrequent(nums: IntArray, k: Int): IntArray {
+
+        val map = mutableMapOf<Int, Int>()
+        val ans = IntArray(k)
+        for(num in nums) {
+            map[num] = map.getOrDefault(num, 0) + 1
+        }
+
+        val minHeap = PriorityQueue<Pair<Int, Int>>() {a,b -> a.first - b.first}
+
+        for((num, fre) in map) {
+
+            minHeap.offer(Pair(fre, num))
+
+            if(minHeap.size > k) {
+                minHeap.poll()
+            }
+
+        }
+
+        var count = 0
+        while(!minHeap.isEmpty()) {
+
+            ans[count] = minHeap.peek().second
+            count++
+            minHeap.poll()
+
+        }
+
+        return ans
     }
 }
