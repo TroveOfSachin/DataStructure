@@ -1,5 +1,8 @@
 package backbase
 
+import java.util.*
+import kotlin.collections.ArrayDeque
+
 
 data class Student(val id: Int, val name: String, val subscribedCourses: List<Course>)
 data class Course(val id: Int, val name: String, val isPaid: Boolean)
@@ -11,6 +14,7 @@ class Test {
         coursesCount: Int,
         repository: Iterable<Student>
     ): Map<Course, Int> {
+
 
         // declaring result for output
         val result = mutableMapOf<Course, Int>()
@@ -51,3 +55,62 @@ class Test {
 
 
 }
+
+
+object Main {
+
+    @JvmStatic
+    fun main(args: Array<String>) {
+        linkedList()
+    }
+
+    fun linkedList() {
+        val fifo = LinkedList<Int>()
+        for (i in 1..5) {
+            fifo.add(i)
+        }
+        println("FIFO : ")
+        while (!fifo.isEmpty()) {
+            print("${fifo.pop()}, ")
+        }
+        // it prints
+        // 1, 2, 3, 4, 5 as FIFO
+
+        val lifo = LinkedList<Int>()
+        for (i in 1..5) {
+            lifo.push(i)
+        }
+        println("\nLIFO : ")
+        while (!lifo.isEmpty()) {
+            print("${lifo.pop()}, ")
+        }
+        // it prints
+        // 5, 4, 3, 2, 1 as LIFO
+    }
+
+
+    fun stack() {
+        val fifo = Stack<Int>()
+        for (i in 1..5) {
+            fifo.add(i)
+        }
+        println("FIFO : ")
+        while (!fifo.isEmpty()) {
+            print("${fifo.pop()}, ")
+        }
+        // it prints
+        // 1, 2, 3, 4, 5 as FIFO
+
+        val lifo = Stack<Int>()
+        for (i in 1..5) {
+            lifo.push(i)
+        }
+        println("\nLIFO : ")
+        while (!lifo.isEmpty()) {
+            print("${lifo.pop()}, ")
+        }
+        // it prints
+        // 5, 4, 3, 2, 1 as LIFO
+    }
+}
+

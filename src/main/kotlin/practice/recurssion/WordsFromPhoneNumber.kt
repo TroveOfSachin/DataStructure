@@ -67,7 +67,7 @@ class WordsFromPhoneNumber {
                 return
             }
 
-            letterComb[phoneNumber[current].digitToInt()].forEach {
+            letterComb["${phoneNumber[current]}".toInt()].forEach {
                 str.append(it)
                 generateCombination(str, current + 1, output, phoneLen)
                 str.deleteCharAt(current - (phoneNumber.length - phoneLen))
@@ -80,4 +80,47 @@ class WordsFromPhoneNumber {
 
         return output
     }
+
+
+    val NUMS = mapOf(
+        2 to "abc",
+        3 to "def",
+        4 to "ghi",
+        5 to "jkl",
+        6 to "mno",
+        7 to "pqrs",
+        8 to "tuv",
+        9 to "wxyz"
+    )
+    /**
+    backtracking alg
+
+     **/
+    fun letterCombinations(digits: String): List<String> {
+        if (digits.isEmpty()) return acc
+
+        backtracking(0, digits, StringBuilder())
+        return acc
+
+    }
+    val acc = mutableListOf<String>()
+
+    private fun backtracking(idx: Int, digits: String, current: StringBuilder) {
+        if (idx >= digits.length) {
+
+            acc.add(current.toString())
+            return
+        }
+
+        val digit = digits[idx] - '0' // ex. 2
+
+        val letters = NUMS[digit]!! // ex."abc"
+
+        for (c in letters) {
+            current.append(c)
+            backtracking(idx + 1, digits, current)
+            current.setLength(current.length - 1)
+        }
+    }
+
 }
