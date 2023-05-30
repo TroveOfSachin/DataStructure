@@ -18,6 +18,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.test {
@@ -26,4 +27,5 @@ tasks.test {
 
 kotlin {
     jvmToolchain(8)
+    jvmToolchain(11)
 }

@@ -93,3 +93,34 @@ fun <T> Boolean.ternary(trueCondition: () -> T, falseCondition: () -> T): () -> 
 fun <T> Boolean.ternary(trueValue: T, falseValue: T): T {
     return if (this) trueValue else falseValue
 }
+
+
+fun Array<IntArray>.init(input: String): Array<IntArray> {
+    val rows = this.size
+    val cols = this[0].size
+
+    val values = input
+        .replace("[[", "") // remove leading double brackets
+        .replace("]]", "") // remove trailing double brackets
+        .split("], [") // split into individual rows
+
+    require(values.size == rows) {
+        "Invalid number of rows"
+    }
+
+    for (i in values.indices) {
+        val rowValues = values[i]
+            .split(", ") // split row into individual values
+
+        require(rowValues.size == cols) {
+            "Invalid number of elements in row $i"
+        }
+
+        for (j in rowValues.indices) {
+            this[i][j] = rowValues[j].toIntOrNull() ?: throw IllegalArgumentException("Invalid value in row $i")
+        }
+    }
+    return this
+}
+
+

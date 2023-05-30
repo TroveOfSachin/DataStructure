@@ -64,13 +64,14 @@ object SampleTreeData {
     )
 
     private val arr9 = arrayListOf<Int?>(
-        1,
-        2, 3,
-        4, null, null, 5
+        200,
+        100, 300
     )
 
 
-    private val root: BinaryTreeNode? = createTreeFromArray(arr9)
+
+
+    private val root: BinaryTreeNode? = createTreeFromArray(arr8)
     fun getTreeAsNode() = root
 
     private val multiArr1 = arrayOf(1, null, 3, 2, 4, null, 5, 6)

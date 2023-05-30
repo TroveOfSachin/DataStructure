@@ -77,7 +77,7 @@ class SuccessorPredecessor {
 
         var ancestor: BinaryTreeNode? = null
         var current = root
-        while (current!=null && current.value != k.value) {
+        while (current != null && current.value != k.value) {
             if (k.value > current?.value!!) {
                 ancestor = current
                 current = current.right
@@ -92,13 +92,10 @@ class SuccessorPredecessor {
     }
 
 
-
-
     var foundA = false
     var foundB = false
 
     fun lca(root: BinaryTreeNode?, a: BinaryTreeNode?, b: BinaryTreeNode?): Int {
-        // Write your code here.
         if (root == null || a == null || b == null) {
             return 0
         }
@@ -118,7 +115,7 @@ class SuccessorPredecessor {
 
     var lca = true
 
-    fun preorder(node: BinaryTreeNode, a: Int, b: Int, pathToAOrB: ArrayList<Pair<Int, Boolean>>) {
+    private fun preorder(node: BinaryTreeNode, a: Int, b: Int, pathToAOrB: ArrayList<Pair<Int, Boolean>>) {
 
         if (foundA && foundB) {
             return

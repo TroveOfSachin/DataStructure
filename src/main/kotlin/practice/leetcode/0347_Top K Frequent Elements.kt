@@ -1,10 +1,14 @@
 package practice.sorting
 
+import com.sun.jdi.connect.Connector.IntegerArgument
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 /**
+ *
+ * ### [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
+ *
  * ### Top K Frequent Elements
  *
  * Given an integer array and a number k, find the k most frequent elements in the array.
@@ -40,51 +44,37 @@ import kotlin.collections.ArrayList
 
 fun main() {
 
+    val x = 0
+    if(x == 0 ){
+        val x = 5
+        println(x)
+    }else println("Y")
+
+    println("13" + 5 + 3)
+
+
+
+    val nums = intArrayOf(1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6)
+    val map = mutableMapOf<Int, Int>()
+
+    for (num in nums) {
+        map[num] = map.getOrDefault(num, 0) + 1
+    }
+
+    val queue = PriorityQueue<Int> { n1, n2 -> map.getOrDefault(n2, 0) - map.getOrDefault(n1, 0) }
+
+
+    for (num in map.keys) queue.add(num)
+
+    println(queue)
+
+
     val topKFrequentElements = TopKFrequentElements()
-    val output = topKFrequentElements.findKFrequentElements_Approach_2(
-        arrayListOf(
-            1,
-            1,
-            1,
-            1,
-            2,
-            2,
-            2,
-            3,
-            3,
-            3,
-            3,
-            3,
-            3,
-            3,
-            3,
-            3,
-            4,
-            4,
-            4,
-            4,
-            4,
-            4,
-            4,
-            4,
-            5,
-            5,
-            5,
-            6,
-            6,
-            6,
-            6,
-            6,
-            6,
-            6,
-            6,
-            6,
-            6,
-            6,
-            6,
-            6
-        ), 3
-    )
+    //@formatter:off
+    val output = topKFrequentElements.findKFrequentElements_Approach_2(arrayListOf(1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6,), 3)
+    //@formatter:on
+
+
     println(output)
 }
 
@@ -139,24 +129,24 @@ class TopKFrequentElements {
 
         val map = mutableMapOf<Int, Int>()
         val ans = IntArray(k)
-        for(num in nums) {
+        for (num in nums) {
             map[num] = map.getOrDefault(num, 0) + 1
         }
 
-        val minHeap = PriorityQueue<Pair<Int, Int>>() {a,b -> a.first - b.first}
+        val minHeap = PriorityQueue<Pair<Int, Int>>() { a, b -> a.first - b.first }
 
-        for((num, fre) in map) {
+        for ((num, fre) in map) {
 
             minHeap.offer(Pair(fre, num))
 
-            if(minHeap.size > k) {
+            if (minHeap.size > k) {
                 minHeap.poll()
             }
 
         }
 
         var count = 0
-        while(!minHeap.isEmpty()) {
+        while (!minHeap.isEmpty()) {
 
             ans[count] = minHeap.peek().second
             count++
@@ -166,4 +156,44 @@ class TopKFrequentElements {
 
         return ans
     }
+
+
+    /*
+    Approach 3
+     */
+
+
+    class PairComparator : Comparator<Pair<Int, Int>> {
+        override fun compare(a: Pair<Int, Int>, b: Pair<Int, Int>): Int {
+            return a.first - b.first
+        }
+    }
+
+
+    fun topKFrequentApproach_3(nums: IntArray, k: Int): IntArray {
+
+        val map = HashMap<Int, Int>()
+        val ans = IntArray(k) { -1 }
+
+
+        val heap = PriorityQueue<Pair<Int, Int>>(k, PairComparator())
+
+        for ((num, fre) in map) {
+            heap.offer(Pair(fre, num))
+            if (heap.size > k) {
+                heap.poll()
+            }
+        }
+
+        var count = 0
+        while (!heap.isEmpty()) {
+            ans[count++] = heap.poll().second
+        }
+
+        return ans
+    }
+
 }
+
+
+

@@ -1,11 +1,12 @@
 package practice.leetcode
 
+
+/**
+ * #### [990. Satisfiability of Equality Equations] (https://leetcode.com/problems/satisfiability-of-equality-equations/description/)
+ */
 fun main() {
 
     val input = arrayOf("a==b", "b!=c", "c==a")
-
-
-
 
     println("Stability : ${SatisfiabilityOfEqualityEquations().equationsPossible(input)}")
 }

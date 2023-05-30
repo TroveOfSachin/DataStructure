@@ -4,6 +4,7 @@ import print
 import tree.base.BinaryTreeNode
 import tree.base.SampleTreeData
 import java.util.*
+import kotlin.collections.ArrayDeque
 import kotlin.collections.ArrayList
 
 fun main() {
@@ -66,6 +67,8 @@ fun main() {
 }
 
 
+
+
 class TreeTraversal {
 
 
@@ -112,6 +115,7 @@ class TreeTraversal {
 
             traverse(root.left, output)
             output.add(root.value)
+
             traverse(root.right, output)
             return output
         }
