@@ -3,13 +3,6 @@ package practice.leetcode
 
 fun main() {
 
-    fun help(): Boolean {
-        val map = mutableMapOf(1 to 5, 2 to 7, 3 to 10)
-
-        return (map.put(1, (map[1]!! - 1)))!! < 0
-    }
-
-
     val res = MinimumCostToCutStick().minCost(9, intArrayOf(5, 6, 1, 4, 2))
 
     println(res)
