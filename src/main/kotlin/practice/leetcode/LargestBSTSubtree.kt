@@ -6,6 +6,7 @@ package practice.leetcode
 
 
 fun main() {
+    " ".toCharArray()
     val s = "leetscode"
     val dict = arrayOf("leet","code","leetcode")
     val ss = mutableSetOf<Char>()

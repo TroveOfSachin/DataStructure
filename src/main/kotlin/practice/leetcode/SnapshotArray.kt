@@ -2,6 +2,9 @@ package practice.leetcode
 
 import java.util.*
 
+/**
+ * #### (1146. Snapshot Array)[https://leetcode.com/problems/snapshot-array/]
+ */
 
 fun main() {
     val s = SnapshotArray(10)
@@ -24,7 +27,12 @@ class SnapshotArray(length: Int) {
 
     init {
         arr = Array(length) { mutableListOf() }
+
+        String(("  ".toCharArray()))
+
     }
+
+
 
     fun set(index: Int, `val`: Int) {
         arr[index].add(intArrayOf(idx, `val`))

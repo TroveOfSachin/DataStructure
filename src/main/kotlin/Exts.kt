@@ -95,32 +95,27 @@ fun <T> Boolean.ternary(trueValue: T, falseValue: T): T {
 }
 
 
-fun Array<IntArray>.init(input: String): Array<IntArray> {
-    val rows = this.size
-    val cols = this[0].size
+fun String.parse2DIntArray(): Array<IntArray> {
+    val rows = this
+        .trim('[', ']') // remove outer brackets
+        .split("],") // split into individual rows
 
-    val values = input
-        .replace("[[", "") // remove leading double brackets
-        .replace("]]", "") // remove trailing double brackets
-        .split("], [") // split into individual rows
+    val rowCount = rows.size
+    val colCount = rows[0].split(",").size
 
-    require(values.size == rows) {
-        "Invalid number of rows"
-    }
+    val result = Array(rowCount) { IntArray(colCount) }
 
-    for (i in values.indices) {
-        val rowValues = values[i]
-            .split(", ") // split row into individual values
+    for (i in 0 until rowCount) {
+        val rowValues = rows[i]
+            .trim('[', ']') // remove inner brackets
+            .split(",") // split row into individual values
 
-        require(rowValues.size == cols) {
-            "Invalid number of elements in row $i"
-        }
-
-        for (j in rowValues.indices) {
-            this[i][j] = rowValues[j].toIntOrNull() ?: throw IllegalArgumentException("Invalid value in row $i")
+        for (j in 0 until colCount) {
+            result[i][j] = rowValues[j].trim().toInt()
         }
     }
-    return this
+
+    return result
 }
 
 
